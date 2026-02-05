@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Menu } from "lucide-react";
+import { ArrowUpRight, Menu, Moon, Sun } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -14,7 +14,7 @@ const sections = [
   { id: "contact", label: "Contact" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ isDark, onToggleTheme }) => {
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
@@ -46,7 +46,7 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 z-50 w-full transition-all",
         scrolled
-          ? "border-b border-border/70 bg-white/75 shadow-sm backdrop-blur"
+          ? "border-b border-border/70 bg-background/80 shadow-sm backdrop-blur"
           : "bg-transparent"
       )}
     >
@@ -77,6 +77,15 @@ const Navbar = () => {
           ))}
         </nav>
         <div className="hidden items-center gap-3 md:flex">
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={onToggleTheme}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
           <Button asChild variant="outline" size="sm">
             <a href="#contact">Let's talk</a>
           </Button>
@@ -87,14 +96,23 @@ const Navbar = () => {
             </a>
           </Button>
         </div>
-        <div className="md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={onToggleTheme}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" aria-label="Open menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-white/95">
+            <SheetContent side="right" className="bg-background/95">
               <div className="flex h-full flex-col gap-6">
                 <div>
                   <p className="font-display text-lg">Rishabh Raj</p>

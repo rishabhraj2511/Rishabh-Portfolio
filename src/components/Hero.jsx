@@ -69,7 +69,7 @@ const Hero = () => {
           <Card className="glass-card relative overflow-hidden transition-transform duration-500 ease-out hover:-translate-y-1">
             <CardContent className="space-y-5 p-6">
               <div className="flex items-center gap-4">
-                <Avatar className="h-20 w-20 border border-white/70">
+                <Avatar className="h-20 w-20 border border-border/70">
                   <AvatarImage src={realPhoto} alt="Rishabh Raj" />
                   <AvatarFallback>RR</AvatarFallback>
                 </Avatar>
