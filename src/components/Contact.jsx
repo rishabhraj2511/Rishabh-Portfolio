@@ -48,7 +48,7 @@ const Contact = () => {
   return (
     <section id="contact" className="section-surface">
       <div className="container grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-6">
+        <div className="space-y-6 reveal">
           <Badge variant="outline" className="w-fit">
             Contact
           </Badge>
@@ -70,7 +70,7 @@ const Contact = () => {
             </Button>
           </div>
         </div>
-        <Card className="glass-card">
+        <Card className="glass-card reveal reveal-delay-1 transition-transform duration-300 ease-out hover:-translate-y-1">
           <CardHeader>
             <CardTitle>Reach me directly</CardTitle>
             <CardDescription>
