@@ -1,141 +1,97 @@
+import { ArrowUpRight } from "lucide-react";
+
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+
 const projects = [
   {
     title: "Portfolio Website",
     description:
-      "A modern, responsive portfolio built with React and a cyber-inspired dark UI. Focused on clean layout, smooth interactions, and clear skill representation.",
-    tech: ["React", "CSS", "Vite"],
+      "A redesigned portfolio focused on clear storytelling, smooth navigation, and a polished UI system.",
+    tech: ["React", "Vite", "UI System"],
     link: "https://github.com/",
+    status: "Featured",
   },
   {
     title: "Networking & Security Labs",
     description:
-      "Hands-on practice with networking fundamentals, ethical hacking concepts, and system-level exploration to understand real-world vulnerabilities.",
+      "Hands on labs covering packet analysis, network configuration, and ethical hacking fundamentals.",
     tech: ["Linux", "Networking", "Security"],
     link: "#",
+    status: "Ongoing",
   },
   {
-    title: "Ongoing Learning Projects",
+    title: "Learning Projects",
     description:
-      "Actively building projects in full-stack development and cybersecurity. This section will evolve as I ship more real-world applications.",
-    tech: ["Node.js", "Express.js", "MongoDB"],
+      "A growing collection of full stack experiments that explore APIs, databases, and deployment workflows.",
+    tech: ["Node.js", "Express", "MongoDB"],
     link: "#",
+    status: "In progress",
   },
 ];
 
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="cyber-bg"
-      style={{
-        padding: "90px 20px",
-        borderTop: "1px solid rgba(0,255,255,0.08)",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <div style={{ maxWidth: "1100px", width: "100%" }}>
-        {/* Heading */}
-        <h2
-          style={{
-            fontSize: "2.6rem",
-            marginBottom: "60px",
-            color: "#ffffff",
-            textAlign: "center",
-          }}
-        >
-          My{" "}
-          <span
-            style={{
-              color: "#00ffff",
-              textShadow: "0 0 15px #00ffff",
-            }}
-          >
-            Work
-          </span>
-        </h2>
-
-        {/* Cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "40px",
-          }}
-        >
-          {projects.map((project, i) => (
-            <div
-              key={i}
-              onClick={() => window.open(project.link, "_blank")}
-              style={{
-                background: "#0f0f0f",
-                padding: "28px",
-                borderRadius: "16px",
-                border: "1px solid rgba(0,255,255,0.12)",
-                cursor: "pointer",
-                transition: "all 0.35s ease",
-                position: "relative",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-6px)";
-                e.currentTarget.style.boxShadow =
-                  "0 14px 40px rgba(0,255,255,0.15)";
-                e.currentTarget.style.border =
-                  "1px solid rgba(0,255,255,0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.border =
-                  "1px solid rgba(0,255,255,0.12)";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "scale(0.97)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "translateY(-6px)";
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: "1.3rem",
-                  marginBottom: "14px",
-                  color: "#00ffff",
-                }}
+    <section id="projects" className="section-surface">
+      <div className="container py-20">
+        <div className="space-y-3">
+          <Badge variant="outline" className="w-fit">
+            Projects
+          </Badge>
+          <h2 className="font-display text-3xl md:text-4xl">
+            Recent work and experiments.
+          </h2>
+          <p className="max-w-2xl text-muted-foreground">
+            A snapshot of projects that highlight my approach to building and
+            securing modern web experiences.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => {
+            const isExternal = project.link.startsWith("http");
+            return (
+              <Card
+                key={project.title}
+                className="glass-card flex h-full flex-col"
               >
-                {project.title}
-              </h3>
-
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  lineHeight: "1.7",
-                  color: "#cccccc",
-                  marginBottom: "18px",
-                }}
-              >
-                {project.description}
-              </p>
-
-              {/* Tech tags */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                {project.tech.map((t, idx) => (
-                  <span
-                    key={idx}
-                    style={{
-                      padding: "7px 16px",
-                      fontSize: "0.8rem",
-                      borderRadius: "20px",
-                      border: "1px solid rgba(0,255,255,0.35)",
-                      color: "#00ffff",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+                <CardHeader className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>{project.title}</CardTitle>
+                    <Badge variant="secondary">{project.status}</Badge>
+                  </div>
+                  <CardDescription>{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <Badge key={tech} variant="outline">
+                      {tech}
+                    </Badge>
+                  ))}
+                </CardContent>
+                <CardFooter className="mt-auto">
+                  <Button asChild variant="outline" className="w-full">
+                    <a
+                      href={project.link}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      className="inline-flex items-center justify-center"
+                    >
+                      View project
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardFooter>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

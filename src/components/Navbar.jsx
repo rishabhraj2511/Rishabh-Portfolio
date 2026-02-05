@@ -1,199 +1,135 @@
 import { useEffect, useState } from "react";
+import { ArrowUpRight, Menu } from "lucide-react";
 
-const sections = ["home", "about", "skills", "projects", "contact"];
+import { Button } from "./ui/button";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
+import { cn } from "../lib/utils";
+
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Journey" },
+  { id: "contact", label: "Contact" },
+];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 16);
 
-      sections.forEach((sec) => {
-        const el = document.getElementById(sec);
-        if (!el) return;
+      let current = "home";
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (!el) continue;
 
         const rect = el.getBoundingClientRect();
-        if (rect.top <= 120 && rect.bottom >= 120) {
-          setActive(sec);
+        if (rect.top <= 140 && rect.bottom >= 140) {
+          current = section.id;
+          break;
         }
-      });
+      }
+      setActive(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setMenuOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <>
-      {/* ================= NAVBAR ================= */}
-      <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          zIndex: 2000,
-          padding: "18px 60px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          background: scrolled
-            ? "rgba(10,10,10,0.75)"
-            : "transparent",
-          backdropFilter: scrolled ? "blur(10px)" : "none",
-          borderBottom: scrolled
-            ? "1px solid rgba(0,255,255,0.15)"
-            : "none",
-          boxShadow: scrolled
-            ? "0 8px 30px rgba(0,255,255,0.15)"
-            : "none",
-          transition: "all 0.3s ease",
-        }}
-      >
-        {/* Logo */}
-        <h2
-          style={{
-            color: "#00ffff",
-            fontWeight: "700",
-            textShadow: "0 0 12px rgba(0,255,255,0.6)",
-          }}
-        >
+    <header
+      className={cn(
+        "fixed top-0 z-50 w-full transition-all",
+        scrolled
+          ? "border-b border-border/70 bg-white/75 shadow-sm backdrop-blur"
+          : "bg-transparent"
+      )}
+    >
+      <div className="container flex h-16 items-center justify-between">
+        <a href="#home" className="font-display text-lg text-foreground">
           Rishabh Raj
-        </h2>
-
-        {/* -------- DESKTOP MENU -------- */}
-        <div
-          className="desktop-menu"
-          style={{
-            display: "flex",
-            gap: "30px",
-          }}
-        >
-          {sections.map((item) => (
+        </a>
+        <nav className="hidden items-center gap-6 md:flex">
+          {sections.map((section) => (
             <a
-              key={item}
-              href={`#${item}`}
-              style={{
-                position: "relative",
-                color: active === item ? "#00ffff" : "#ffffff",
-                textDecoration: "none",
-                fontSize: "0.95rem",
-                paddingBottom: "6px",
-              }}
+              key={section.id}
+              href={`#${section.id}`}
+              className={cn(
+                "relative text-sm font-medium transition-colors",
+                active === section.id
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
             >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
-
-              {/* Active underline */}
+              {section.label}
               <span
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  bottom: 0,
-                  height: "2px",
-                  width: active === item ? "100%" : "0%",
-                  background:
-                    "linear-gradient(90deg, #00ffff, #4cff4c)",
-                  boxShadow:
-                    active === item
-                      ? "0 0 10px rgba(0,255,255,0.8)"
-                      : "none",
-                  transition: "width 0.3s ease",
-                }}
+                className={cn(
+                  "absolute -bottom-2 left-0 h-[2px] w-full rounded-full bg-primary transition-opacity",
+                  active === section.id ? "opacity-100" : "opacity-0"
+                )}
               />
             </a>
           ))}
+        </nav>
+        <div className="hidden items-center gap-3 md:flex">
+          <Button asChild variant="outline" size="sm">
+            <a href="#contact">Let's talk</a>
+          </Button>
+          <Button asChild size="sm">
+            <a href="#projects" className="inline-flex items-center">
+              View work
+              <ArrowUpRight className="ml-1 h-4 w-4" />
+            </a>
+          </Button>
         </div>
-
-        {/* -------- HAMBURGER (MOBILE) -------- */}
-        <div
-          className="hamburger"
-          onClick={() => setMenuOpen(true)}
-          style={{
-            display: "none",
-            fontSize: "1.8rem",
-            color: "#00ffff",
-            cursor: "pointer",
-          }}
-        >
-          ☰
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button size="icon" variant="outline" aria-label="Open menu">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-white/95">
+              <div className="flex h-full flex-col gap-6">
+                <div>
+                  <p className="font-display text-lg">Rishabh Raj</p>
+                  <p className="text-sm text-muted-foreground">
+                    Full stack development and security labs
+                  </p>
+                </div>
+                <nav className="flex flex-col gap-2">
+                  {sections.map((section) => (
+                    <SheetClose asChild key={section.id}>
+                      <a
+                        href={`#${section.id}`}
+                        className={cn(
+                          "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                          active === section.id
+                            ? "bg-accent text-accent-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        {section.label}
+                      </a>
+                    </SheetClose>
+                  ))}
+                </nav>
+                <div className="mt-auto">
+                  <Button asChild className="w-full">
+                    <a href="#contact">Start a conversation</a>
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-      </nav>
-{/* ================= MOBILE SLIDE MENU ================= */}
-<div
-  style={{
-    position: "fixed",
-    top: 0,
-    right: 0,
-    height: "100vh",
-    width: "260px",
-    background: "rgba(1, 34, 43, 0.97)",
-    backdropFilter: "blur(12px)",
-    transform: menuOpen ? "translateX(0)" : "translateX(100%)",
-    transition: "transform 0.35s ease",
-    zIndex: 2000,
-    paddingTop: "100px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "26px",
-  }}
->
-  {/* CLOSE BUTTON */}
-  <button
-    onClick={() => setMenuOpen(false)}
-    style={{
-      position: "absolute",
-      top: "20px",
-      right: "20px",
-      fontSize: "1.8rem",
-      background: "transparent",
-      border: "none",
-      color: "#00ffff",
-      cursor: "pointer",
-      zIndex: 2001,
-    }}
-  >
-    ✕
-  </button>
-
-  {sections.map((item) => (
-    <a
-      key={item}
-      href={`#${item}`}
-      onClick={() => setMenuOpen(false)}
-      style={{
-        padding: "10px 24px",
-        color: active === item ? "#00ffff" : "#ffffff",
-        fontSize: "1.05rem",
-        textDecoration: "none",
-        borderLeft:
-          active === item
-            ? "3px solid #4cff4c"
-            : "3px solid transparent",
-        background:
-          active === item
-            ? "rgba(0,255,255,0.08)"
-            : "transparent",
-        transition: "all 0.25s ease",
-      }}
-    >
-      {item.charAt(0).toUpperCase() + item.slice(1)}
-    </a>
-  ))}
-</div>
-    </>
+      </div>
+    </header>
   );
 };
 
