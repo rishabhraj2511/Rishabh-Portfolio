@@ -1,160 +1,113 @@
+import { ArrowUpRight, Github, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Separator } from "./ui/separator";
+
 const contactLinks = [
   {
-    icon: "fa-solid fa-envelope",
-    color: "#EA4335",
-    text: "rishabhraj8423@gmail.com",
-    link: "mailto:rishabhraj8423@gmail.com",
+    label: "Email",
+    value: "rishabhraj8423@gmail.com",
+    href: "mailto:rishabhraj8423@gmail.com",
+    icon: Mail,
   },
   {
-    icon: "fa-solid fa-phone",
-    color: "#34A853",
-    text: "+91 9219548059",
-    link: "tel:9219548059",
+    label: "Phone",
+    value: "+91 9219548059",
+    href: "tel:9219548059",
+    icon: Phone,
   },
   {
-    icon: "fa-brands fa-github",
-    color: "#ffffff",
-    text: "github.com/rishabhraj2511",
-    link: "https://github.com/rishabhraj2511",
-  },
-    {
-    icon: "fa-brands fa-instagram",
-    color: "#E4405F",
-    text: "instagram.com/rishabhraj880",
-    link: "https://www.instagram.com/rishabhraj880/",
+    label: "GitHub",
+    value: "github.com/rishabhraj2511",
+    href: "https://github.com/rishabhraj2511",
+    icon: Github,
   },
   {
-    icon: "fa-brands fa-linkedin",
-    color: "#0A66C2",
-    text: "linkedin.com/in/rishabh-raj",
-    link: "https://www.linkedin.com/in/rishabh-raj-422477327/",
+    label: "LinkedIn",
+    value: "linkedin.com/in/rishabh-raj",
+    href: "https://www.linkedin.com/in/rishabh-raj-422477327/",
+    icon: Linkedin,
   },
-
   {
-    icon: "fa-brands fa-x-twitter",
-    color: "#ffffff",
-    text: "x.com/rishabhraj2511",
-    link: "https://x.com/rishabhraj2511",
+    label: "Instagram",
+    value: "instagram.com/rishabhraj880",
+    href: "https://www.instagram.com/rishabhraj880/",
+    icon: Instagram,
   },
 ];
 
 const Contact = () => {
   return (
-    <section
-      id="contact"
-      className="cyber-bg"
-      style={{
-        padding: "60px 10px",
-        borderTop: "1px solid rgba(0,255,255,0.08)",
-      }}
-    >
-      {/* CENTER HEADING */}
-      <h2
-        style={{
-          fontSize: "2.6rem",
-          marginBottom: "70px",
-          color: "#ffffff",
-          textAlign: "center",
-        }}
-      >
-        Contact{" "}
-        <span
-          style={{
-            color: "#00ffff",
-            textShadow: "0 0 15px #00ffff",
-          }}
-        >
-          Me
-        </span>
-      </h2>
-
-      {/* CONTENT AREA (ABOUT-LIKE ALIGNMENT) */}
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        {/* SUB HEADING */}
-        <h3
-          style={{
-            fontSize: "2.1rem",
-            marginBottom: "35px",
-            color: "#00ffff",
-            textShadow: "0 0 10px #00ffff",
-          }}
-        >
-          Let’s Connect!
-        </h3>
-
-        {/* CONTACT GRID : 3 LEFT + 3 RIGHT */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
-            gap: "26px 40px",
-            marginBottom: "40px",
-          }}
-        >
-          {contactLinks.map((item, i) => (
-            <a
-              key={i}
-              href={item.link}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "18px",
-                padding: "14px 28px",
-                borderRadius: "40px",
-                border: "1px solid rgba(0,255,255,0.25)",
-                color: "#ffffff",
-                textDecoration: "none",
-                fontSize: "1rem",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "rgba(0,255,255,0.08)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 22px rgba(0,255,255,0.45)";
-                e.currentTarget.style.transform =
-                  "translateY(3px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.transform =
-                  "translateY(0)";
-              }}
-            >
-              <i
-                className={item.icon}
-                style={{
-                  fontSize: "1.35rem",
-                  color: item.color,
-                  minWidth: "24px",
-                }}
-              ></i>
-              <span>{item.text}</span>
-            </a>
-          ))}
+    <section id="contact" className="section-surface">
+      <div className="container grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="space-y-6">
+          <Badge variant="outline" className="w-fit">
+            Contact
+          </Badge>
+          <h2 className="font-display text-3xl md:text-4xl">
+            Let's connect and build something meaningful.
+          </h2>
+          <p className="max-w-xl text-muted-foreground">
+            Whether you want to collaborate, talk security, or share ideas, my
+            inbox is open. I am always happy to learn with others.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <a href="mailto:rishabhraj8423@gmail.com">Send an email</a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href="https://github.com/rishabhraj2511" target="_blank" rel="noreferrer">
+                Visit GitHub
+              </a>
+            </Button>
+          </div>
         </div>
-
-        {/* CLOSING MESSAGE */}
-        <p
-          style={{
-            fontSize: "1.05rem",
-            lineHeight: "1.8",
-            color: "#cccccc",
-            maxWidth: "650px",
-          }}
-        >
-          Whether you want to collaborate on a project, talk about
-          cybersecurity, or just have a meaningful tech conversation —
-          my inbox is always open.
-        </p>
+        <Card className="glass-card">
+          <CardHeader>
+            <CardTitle>Reach me directly</CardTitle>
+            <CardDescription>
+              Choose the channel that works best for you.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {contactLinks.map((item) => {
+              const Icon = item.icon;
+              const isExternal = item.href.startsWith("http");
+              return (
+                <Button
+                  key={item.label}
+                  asChild
+                  variant="outline"
+                  className="w-full justify-between"
+                >
+                  <a
+                    href={item.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
+                  >
+                    <span className="flex items-center gap-2">
+                      <Icon className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-medium">{item.value}</span>
+                    </span>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              );
+            })}
+            <Separator className="my-2" />
+            <p className="text-xs text-muted-foreground">
+              Based in India and open to remote opportunities and collaborations.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

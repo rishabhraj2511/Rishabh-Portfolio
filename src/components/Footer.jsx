@@ -1,115 +1,55 @@
+import { Github, Instagram, Linkedin } from "lucide-react";
+
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
+
 const Footer = () => {
   return (
-    <footer
-      className="cyber-bg"
-      style={{
-        padding: "60px 20px 40px",
-        borderTop: "1px solid rgba(0,255,255,0.08)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        {/* Name */}
-        <h3
-          style={{
-            color: "#00ffff",
-            fontSize: "1.4rem",
-            marginBottom: "8px",
-            textShadow: "0 0 10px rgba(0,255,255,0.55)",
-          }}
-        >
-          Rishabh Raj
-        </h3>
-
-        {/* Tagline */}
-        <p
-          style={{
-            color: "#cccccc",
-            fontSize: "0.95rem",
-            marginBottom: "26px",
-            letterSpacing: "0.3px",
-          }}
-        >
-          Building • Breaking • Securing the Web
-        </p>
-
-        {/* Social Links */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "28px",
-            marginBottom: "30px",
-          }}
-        >
-          {[
-            {
-              icon: "fa-brands fa-github",
-              link: "https://github.com/rishabhraj2511",
-            },
-            {
-              icon: "fa-brands fa-linkedin",
-              link: "https://www.linkedin.com/in/rishabh-raj-422477327/",
-            },
-            {
-              icon: "fa-brands fa-instagram",
-              link: "https://www.instagram.com/rishabhraj880/",
-            },
-          ].map((item, i) => (
-            <a
-              key={i}
-              href={item.link}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                color: "#ffffff",
-                fontSize: "1.35rem",
-                transition: "all 0.3s ease",
-                display: "inline-flex",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#00ffff";
-                e.currentTarget.style.textShadow =
-                  "0 0 10px rgba(0,255,255,0.7)";
-                e.currentTarget.style.transform = "translateY(-4px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "#ffffff";
-                e.currentTarget.style.textShadow = "none";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <i className={item.icon}></i>
-            </a>
-          ))}
+    <footer className="py-10">
+      <div className="container space-y-6">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="font-display text-lg">Rishabh Raj</p>
+            <p className="text-sm text-muted-foreground">
+              Building, breaking, and securing the web.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button asChild size="icon" variant="ghost">
+              <a
+                href="https://github.com/rishabhraj2511"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button asChild size="icon" variant="ghost">
+              <a
+                href="https://www.linkedin.com/in/rishabh-raj-422477327/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button asChild size="icon" variant="ghost">
+              <a
+                href="https://www.instagram.com/rishabhraj880/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
         </div>
-
-        {/* Divider */}
-        <div
-          style={{
-            width: "70px",
-            height: "2px",
-            margin: "0 auto 18px",
-            background:
-              "linear-gradient(90deg, #00ffff, #4cff4c)",
-            opacity: 0.6,
-          }}
-        />
-
-        {/* Copyright */}
-        <p
-          style={{
-            color: "#777777",
-            fontSize: "0.85rem",
-            letterSpacing: "0.3px",
-          }}
-        >
-          © {new Date().getFullYear()} Rishabh Raj. All rights reserved.
+        <Separator />
+        <p className="text-xs text-muted-foreground">
+          Copyright {new Date().getFullYear()} Rishabh Raj. All rights reserved.
         </p>
       </div>
     </footer>

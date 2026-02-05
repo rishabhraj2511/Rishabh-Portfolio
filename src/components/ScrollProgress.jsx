@@ -10,28 +10,19 @@ const ScrollProgress = () => {
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
 
-      const scrollPercent = (scrollTop / docHeight) * 100;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setProgress(scrollPercent);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: `${progress}%`,
-        height: "3px",
-        background:
-          "linear-gradient(90deg, #00ffff, #4cff4c)",
-        boxShadow: "0 0 12px rgba(0,255,255,0.8)",
-        zIndex: 2000,
-        transition: "width 0.1s linear",
-      }}
+      className="fixed left-0 top-0 z-50 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-400 transition-[width] duration-150"
+      style={{ width: `${progress}%` }}
     />
   );
 };
