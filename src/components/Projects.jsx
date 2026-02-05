@@ -42,7 +42,7 @@ const Projects = () => {
   return (
     <section id="projects" className="section-surface">
       <div className="container py-20">
-        <div className="space-y-3">
+        <div className="space-y-3 reveal">
           <Badge variant="outline" className="w-fit">
             Projects
           </Badge>
@@ -55,12 +55,17 @@ const Projects = () => {
           </p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             const isExternal = project.link.startsWith("http");
+            const delayClass = [
+              "reveal-delay-1",
+              "reveal-delay-2",
+              "reveal-delay-3",
+            ][index];
             return (
               <Card
                 key={project.title}
-                className="glass-card flex h-full flex-col"
+                className={`glass-card flex h-full flex-col transition-transform duration-300 ease-out hover:-translate-y-1 reveal ${delayClass || ""}`}
               >
                 <CardHeader className="space-y-3">
                   <div className="flex items-center justify-between">

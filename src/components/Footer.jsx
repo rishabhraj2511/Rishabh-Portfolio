@@ -6,7 +6,7 @@ import { Separator } from "./ui/separator";
 const Footer = () => {
   return (
     <footer className="py-10">
-      <div className="container space-y-6">
+      <div className="container space-y-6 reveal">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="font-display text-lg">Rishabh Raj</p>

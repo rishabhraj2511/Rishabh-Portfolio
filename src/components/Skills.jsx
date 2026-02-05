@@ -34,7 +34,7 @@ const Skills = () => {
   return (
     <section id="skills" className="py-20">
       <div className="container grid gap-10">
-        <div className="space-y-3">
+        <div className="space-y-3 reveal">
           <Badge variant="outline" className="w-fit">
             Skills
           </Badge>
@@ -47,7 +47,7 @@ const Skills = () => {
           </p>
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
-          <Card className="glass-card lg:col-span-2">
+          <Card className="glass-card reveal reveal-delay-1 transition-transform duration-300 ease-out hover:-translate-y-1 lg:col-span-2">
             <CardHeader>
               <CardTitle>Programming languages</CardTitle>
             </CardHeader>
@@ -72,7 +72,7 @@ const Skills = () => {
               ))}
             </CardContent>
           </Card>
-          <Card className="glass-card">
+          <Card className="glass-card reveal reveal-delay-2 transition-transform duration-300 ease-out hover:-translate-y-1">
             <CardHeader>
               <CardTitle>Web stack</CardTitle>
             </CardHeader>
@@ -84,7 +84,7 @@ const Skills = () => {
               ))}
             </CardContent>
           </Card>
-          <Card className="glass-card">
+          <Card className="glass-card reveal reveal-delay-3 transition-transform duration-300 ease-out hover:-translate-y-1">
             <CardHeader>
               <CardTitle>Security toolkit</CardTitle>
             </CardHeader>

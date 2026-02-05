@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative">
       <div className="container grid gap-12 py-24 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-        <div className="animate-fade-up space-y-6">
+        <div className="reveal space-y-6">
           <Badge variant="secondary" className="w-fit">
             Full stack developer with a security mindset
           </Badge>
@@ -35,7 +35,7 @@ const Hero = () => {
             </Button>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="glass-card soft-shadow rounded-2xl p-4">
+            <div className="glass-card soft-shadow rounded-2xl p-4 transition-transform duration-300 ease-out hover:-translate-y-1">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Code2 className="h-4 w-4 text-primary" />
                 Development
@@ -44,7 +44,7 @@ const Hero = () => {
                 React, Node, and modern UI systems.
               </p>
             </div>
-            <div className="glass-card soft-shadow rounded-2xl p-4">
+            <div className="glass-card soft-shadow rounded-2xl p-4 transition-transform duration-300 ease-out hover:-translate-y-1">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Shield className="h-4 w-4 text-primary" />
                 Security Labs
@@ -53,7 +53,7 @@ const Hero = () => {
                 Networking, ethical hacking, and hardening.
               </p>
             </div>
-            <div className="glass-card soft-shadow rounded-2xl p-4">
+            <div className="glass-card soft-shadow rounded-2xl p-4 transition-transform duration-300 ease-out hover:-translate-y-1">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <Sparkles className="h-4 w-4 text-primary" />
                 Curiosity
@@ -64,12 +64,12 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="relative animate-fade-up" style={{ animationDelay: "120ms" }}>
-          <div className="hero-ring absolute -right-16 -top-10 h-52 w-52 rounded-full blur-2xl animate-float" />
-          <Card className="glass-card relative overflow-hidden">
+        <div className="relative reveal reveal-delay-1">
+          <div className="hero-ring absolute -right-16 -top-10 h-52 w-52 rounded-full blur-2xl motion-safe:animate-float" />
+          <Card className="glass-card relative overflow-hidden transition-transform duration-500 ease-out hover:-translate-y-1">
             <CardContent className="space-y-5 p-6">
               <div className="flex items-center gap-4">
-                <Avatar className="h-20 w-20 border border-white/70">
+                <Avatar className="h-20 w-20 border border-border/70">
                   <AvatarImage src={realPhoto} alt="Rishabh Raj" />
                   <AvatarFallback>RR</AvatarFallback>
                 </Avatar>
